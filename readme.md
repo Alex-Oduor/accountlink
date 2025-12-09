@@ -30,8 +30,7 @@ AccountLink is a **secure, centralized financial account identity service** that
 
 - **PHP** – backend and API logic  
 - **MySQL** – secure storage of user accounts  
-- **Nginx** – web server for handling requests  
-- **Docker** – optional containerized environment for easy deployment  
+
 
 ---
 
@@ -44,10 +43,7 @@ AccountLink is a **secure, centralized financial account identity service** that
 
 ---
 
-💡 **Tagline:**  
-*"Your accounts, one secure username."*  
 
----
 
 ### Notes
 
