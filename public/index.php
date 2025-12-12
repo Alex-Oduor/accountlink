@@ -28,6 +28,5 @@ $app->router->post('/users/create' , function() {
 });
 
 $app->run();
-S
 
 ?>
