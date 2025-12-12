@@ -2,12 +2,19 @@
 
 class BankDetails{
     private $name;
-    private $accountnumber;
+    private $accountNumber;
 
-    public function __construct($name,$accountnumber){
+    public function __construct($name,$accountNumber){
         $this->name= $name;
-        $this->accountnumber= $accountnumber;
+        $this->accountNumber= $accountNumber;
     }
+
+    //getters and setters
+    public function setName($name){$this->name=$name;}
+    public function getName(){return $this->name;}
+
+    public function setAccountNumber($accountNumber){$this->accountNumber=$accountNumber;}
+    public function getAccountNumber(){return $this->accountNumber;}
 }
 
 ?>
