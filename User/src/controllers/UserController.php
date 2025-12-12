@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../models/User.php';
-require_once __DIR__ . '/../config/Database.php'; 
+require_once __DIR__ . '/../../../core/config/Database.php'; 
 
 class UserController
 {
@@ -17,13 +17,14 @@ class UserController
     // Get all users
     public function getAll()
     {
-        $query = "SELECT id, username, mpesanumber FROM users ORDER BY id DESC";
+        $query = "SELECT id, name, userName, email FROM users ORDER BY id DESC";
         $result = $this->conn->query($query);
 
         $users = [];
         while ($row = $result->fetch_assoc()) {
-            $user = new User($row['id'], $row['username'],null ,$row['mpesanumber']);
-        $users[] = $user;
+            $user = new User($row['id'], $row['name'],$row['userName'] ,null,$row['email']);
+
+        $users[]=['id'=>$user->getId() , 'name'=>$user->getName() ,'userName' =>$user->getUserName , 'email' =>$user->getEmail()];
 
         }
 
@@ -34,7 +35,7 @@ class UserController
     public function create($data)
     {
         // Validate required fields
-        if (empty($data['username']) || empty($data['password']) || empty($data['mpesanumber'])) {
+        if ( empty($data['name']) || empty($data['userName']) || empty($data['password']) || empty($data['email'])) {
             http_response_code(400);
             return ['error' => 'Missing required fields'];
         }
@@ -44,15 +45,16 @@ class UserController
 
     
         $stmt = $this->conn->prepare(
-            "INSERT INTO users (username, password, mpesanumber) VALUES (?, ?, ?)"
+            "INSERT INTO users (name,userName, password, email) VALUES (?, ?, ? , ?)"
         );
 
         
         $stmt->bind_param(
-            "sss",
-            $data['username'],
+            "ssss",
+            $data['name'],
+            $data['userName'],
             $hashedPassword,
-            $data['mpesanumber']
+            $data['email']
         );
 
         if ($stmt->execute()) {
